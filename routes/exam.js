@@ -11,4 +11,11 @@ router.get("/", (req, res) => {
   res.json(exams);
 });
 
+router.post("/", (req, res) => {
+    const newExam = req.body;
+    newExam.id = exams.length + 1;
+    exams.push(newExam);
+    res.status(201).json({ message: "Exam added successfully", exam: newExam});
+});
+
 module.exports = router;
