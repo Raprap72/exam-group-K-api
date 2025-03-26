@@ -18,4 +18,16 @@ router.post("/", (req, res) => {
     res.status(201).json({ message: "Exam added successfully", exam: newExam});
 });
 
+router.put('/exams/:id', (req, res) => {
+    const { id } = req.params;
+    const updateData = req.body;
+    const examIndex = exams.findIndex(e => e.id == id);
+
+    if (examIndex === -1) return res.status(404).json({ message: "Exam not found" });
+
+    exams[examIndex] = { ...exams[examIndex], ...updateData };
+    res.json({ message: "Exam updated", exam: exams[examIndex] });
+});
+
+
 module.exports = router;
